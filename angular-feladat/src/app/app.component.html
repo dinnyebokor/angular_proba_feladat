@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="inputs">
+        <label for="name">Név:</label>
+        <input type="text" [(ngModel)]="name" placeholder="Név" />
+        <label for="experience">Tapasztalat:</label>
+        <input type="text" [(ngModel)]="experience" placeholder="Tapasztalat" />
+        <label for="position">Pozíció:</label>
+        <input type="text" [(ngModel)]="position" placeholder="Pozíció" />
+        <label for="email">Email:</label>
+        <input type="text" [(ngModel)]="email" placeholder="Email" />
+        <label for="status">Státusz:</label>
+        <input type="text" [(ngModel)]="status" placeholder="Státusz" />
+        <label for="date">Dátum:</label>
+        <input type="text" [(ngModel)]="date" placeholder="Dátum" />
+        <button (click)="buttonClicked()">Hozzáad</button>
+        <input type="text" class="search" [(ngModel)]="filterText" (input)="applyFilter()" placeholder="Keresés...">
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th (click)="showUnsorted = false; sort('name')">Név</th>
+                    <th (click)="showUnsorted = false; sort('experience')">Tapasztalat</th>
+                    <th (click)="showUnsorted = false; sort('position')">Pozíció</th>
+                    <th (click)="showUnsorted = false; sort('email')">Email</th>
+                    <th (click)="showUnsorted = false; sort('status')">Státusz</th>
+                    <th (click)="showUnsorted = false; sort('date')">Dátum</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="showUnsorted; else showSorted">
+                <tr *ngFor="let row of (filterText ? filteredRows : rows)">
+                    <td>{{row.name}}</td>
+                    <td>{{row.experience}} </td>
+                    <td>{{row.position}} </td>
+                    <td>{{row.email}}</td>
+                    <td>{{row.status}} <input type="text" [(ngModel)]="row.status" (ngModelChange)="updateStatus(row, $event)"></td>
+                    <td>{{row.date}}</td>
+                </tr>
+            </tbody>
+            <ng-template #showSorted>
+                <tbody>
+                    <tr *ngFor="let row of (filterText ? filteredRows : rows) | orderBy:sortColumn:sortOrder">
+                        <td>{{row.name}}</td>
+                        <td>{{row.experience}} </td>
+                        <td>{{row.position}} </td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.status}} <input type="text" [(ngModel)]="row.status" (ngModelChange)="updateStatus(row, $event)"></td>
+                        <td>{{row.date}}</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+            <ng-template>
+                <tbody *ngIf="filteredRows.length > 0">
+                    <tr *ngFor="let row of (filterText ? filteredRows : rows)">
+                        <td>{{row.name}}</td>
+                        <td>{{row.experience}} </td>
+                        <td>{{row.position}} </td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.status}}</td>
+                        <td>{{row.date}}</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+    </div>
+</div>

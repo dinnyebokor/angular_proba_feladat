@@ -1,0 +1,46 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 100px;
+    align-items: center;
+}
+
+.inputs {
+    display: grid;
+    grid-template-rows: repeat(6, auto);
+    grid-gap: 5px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.table {
+    text-align: center;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+th {
+
+    width: 5%;
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 15px;
+}
+
+th,td {
+    border: 1px solid;
+}
+
+.status-cell {
+    display: table-cell;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+}
